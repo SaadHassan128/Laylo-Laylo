@@ -1,0 +1,1309 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    transition: all 0.8s ease-in-out;
+    position: relative;
+}
+
+/* Theme Backgrounds */
+.light-theme {
+    background: linear-gradient(135deg, #87CEEB 0%, #98D8E8 30%, #F0E68C 70%, #F4A460 100%);
+}
+
+.dark-theme {
+    background: linear-gradient(135deg, #191970 0%, #483D8B 30%, #2F4F4F 70%, #1C1C1C 100%);
+}
+
+/* Beach Scene Container */
+.beach-scene {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Ocean Waves */
+.ocean {
+    position: absolute;
+    bottom: 25%;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    background: linear-gradient(180deg, #4682B4 0%, #1E90FF 50%, #0066CC 100%);
+    overflow: hidden;
+}
+
+.dark-theme .ocean {
+    background: linear-gradient(180deg, #2F4F4F 0%, #191970 50%, #000080 100%);
+}
+
+.wave {
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+    border-radius: 0 0 50% 50%;
+    animation: waveMotion 3s ease-in-out infinite;
+}
+
+.wave:nth-child(2) {
+    animation-delay: -0.5s;
+    opacity: 0.7;
+    transform: translateX(20px);
+}
+
+.wave:nth-child(3) {
+    animation-delay: -1s;
+    opacity: 0.5;
+    transform: translateX(-20px);
+}
+
+/* Beach Sand */
+.sand {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(180deg, #F4A460 0%, #DEB887 50%, #D2B48C 100%);
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(139,69,19,0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 20%, rgba(160,82,45,0.1) 1px, transparent 1px),
+        radial-gradient(circle at 40% 40%, rgba(210,180,140,0.1) 1px, transparent 1px);
+    background-size: 15px 15px, 20px 20px, 25px 25px;
+}
+
+.dark-theme .sand {
+    background: linear-gradient(180deg, #8B7355 0%, #696969 50%, #2F2F2F 100%);
+}
+
+/* Beach Foam */
+.foam {
+    position: absolute;
+    bottom: 25%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.8);
+    animation: foamSpread 2s ease-in-out infinite;
+}
+
+/* Seashells */
+.seashell {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #FFE4E1;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    border: 1px solid #DDA0DD;
+    animation: shellGlimmer 4s ease-in-out infinite;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.seashell:hover {
+    transform: scale(1.2);
+}
+
+/* Footprints in sand */
+.footprint {
+    position: absolute;
+    width: 12px;
+    height: 8px;
+    background: rgba(139, 69, 19, 0.3);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform: rotate(-15deg);
+}
+
+/* Palm trees */
+.palm-tree {
+    position: absolute;
+    bottom: 25%;
+    width: 30px;
+    height: 80px;
+    cursor: pointer;
+}
+
+.palm-trunk {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 6px;
+    height: 60px;
+    background: linear-gradient(180deg, #8B4513 0%, #A0522D 100%);
+    border-radius: 3px;
+    transform: translateX(-50%);
+}
+
+.palm-leaves {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: palmSway 3s ease-in-out infinite;
+}
+
+.palm-leaf {
+    position: absolute;
+    width: 25px;
+    height: 4px;
+    background: linear-gradient(90deg, #228B22 0%, #32CD32 100%);
+    border-radius: 2px;
+    transform-origin: left center;
+}
+
+.palm-leaf:nth-child(1) { transform: rotate(-30deg); }
+.palm-leaf:nth-child(2) { transform: rotate(0deg); }
+.palm-leaf:nth-child(3) { transform: rotate(30deg); }
+.palm-leaf:nth-child(4) { transform: rotate(-60deg); }
+.palm-leaf:nth-child(5) { transform: rotate(60deg); }
+
+/* Beach Ball */
+.beach-ball {
+    position: absolute;
+    bottom: 30%;
+    right: 10%;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: conic-gradient(#FF6B6B 0% 25%, #4ECDC4 25% 50%, #FFE66D 50% 75%, #FF8E53 75% 100%);
+    animation: ballBounce 3s ease-in-out infinite;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.beach-ball:hover {
+    transform: scale(1.1);
+}
+
+/* Seagulls */
+.seagull {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    color: white;
+    font-size: 12px;
+    animation: seagullFly 15s linear infinite;
+    z-index: 10;
+}
+
+/* Sun for light theme */
+.sun {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #ffeb3b 0%, #ff9800 100%);
+    border-radius: 50%;
+    opacity: 1;
+    transition: opacity 0.8s ease-in-out;
+    animation: sunGlow 3s ease-in-out infinite alternate;
+    box-shadow: 0 0 30px rgba(255, 235, 59, 0.6);
+}
+
+.sun::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle, rgba(255, 235, 59, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: sunRays 4s linear infinite;
+}
+
+/* Moon and stars for dark theme */
+.moon {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #f5f5dc 0%, #ddd 100%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    animation: moonGlow 4s ease-in-out infinite alternate;
+    box-shadow: 0 0 25px rgba(245, 245, 220, 0.8);
+}
+
+.moon::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 15px;
+    height: 15px;
+    background: #bbb;
+    border-radius: 50%;
+    box-shadow: 25px 10px 0 #bbb, 10px 35px 0 #bbb;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite;
+}
+
+/* Dark theme visibility */
+.dark-theme .sun {
+    opacity: 0;
+}
+
+.dark-theme .moon,
+.dark-theme .stars {
+    opacity: 1;
+}
+
+/* Starfish Toggle Button */
+.toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 215, 0, 0.8));
+    border: 3px solid rgba(255, 107, 107, 0.6);
+    cursor: pointer;
+    padding: 8px;
+    transition: all 0.8s ease;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.toggle-btn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 12px 30px rgba(255, 107, 107, 0.5);
+}
+
+.toggle-btn:focus {
+    outline: 3px solid #4A90E2;
+    outline-offset: 2px;
+}
+
+.dark-theme .toggle-btn {
+    right: auto;
+    left: 20px;
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.9), rgba(135, 206, 235, 0.8));
+    border: 3px solid rgba(135, 206, 235, 0.6);
+    box-shadow: 0 8px 20px rgba(135, 206, 235, 0.3);
+}
+
+.dark-theme .toggle-btn:hover {
+    box-shadow: 0 12px 30px rgba(135, 206, 235, 0.5);
+}
+
+.starfish-icon {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    fill: #ff6b6b;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 2px 6px rgba(255, 107, 107, 0.4));
+}
+
+.starfish-icon:hover {
+    filter: drop-shadow(0 4px 10px rgba(255, 107, 107, 0.6));
+}
+
+.dark-theme .starfish-icon {
+    fill: #87ceeb;
+    filter: drop-shadow(0 2px 6px rgba(135, 206, 235, 0.4));
+}
+
+.dark-theme .starfish-icon:hover {
+    filter: drop-shadow(0 4px 10px rgba(135, 206, 235, 0.6));
+}
+
+/* Welcome Message */
+.welcome-container {
+    position: absolute;
+    gap: 50px !important;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 100;
+}
+
+.welcome-text {
+    
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: welcomeGlow 3s ease-in-out infinite, gradientShift 4s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.dark-theme .welcome-text {
+    color: #e3f2fd;
+    text-shadow: 0 0 20px rgba(227, 242, 253, 0.5);
+}
+
+/* Animated Hollow Star with N */
+.star-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.hollow-star {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    animation: starRotate 4s linear infinite;
+}
+
+.hollow-star svg {
+    width: 100%;
+    height: 100%;
+    stroke-width: 4;
+    fill: none;
+    stroke: #ff6b6b;
+    filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
+    transition: all 0.5s ease;
+}
+
+.dark-theme .hollow-star svg {
+    stroke: #87ceeb;
+    filter: drop-shadow(0 0 10px rgba(135, 206, 235, 0.5));
+}
+
+.star-letter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff6b6b;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    animation: letterBounce 2s ease-in-out infinite;
+    transition: color 0.5s ease;
+}
+
+.dark-theme .star-letter {
+    color: #87ceeb;
+    text-shadow: 2px 2px 4px rgba(135, 206, 235, 0.3);
+}
+
+/* Special Message Button */
+.message-btn {
+    position: absolute;
+    margin-top: 100px;
+    bottom: 45%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.message-btn:hover {
+    transform: translateX(-50%) translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.message-btn:focus {
+    outline: 3px solid #4A90E2;
+    outline-offset: 2px;
+}
+
+.dark-theme .message-btn {
+    background: linear-gradient(45deg, #4a90e2, #87ceeb);
+}
+
+/* Modal for the message */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 215, 0, 0.95));
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: modalPop 0.5s ease-out;
+}
+
+.dark-theme .modal-content {
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.95), rgba(42, 82, 152, 0.95));
+    color: white;
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.modal-message {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.close-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+}
+
+.close-btn:focus {
+    outline: 3px solid #4A90E2;
+    outline-offset: 2px;
+}
+
+/* Floating Elements */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-cloud {
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 40px;
+    opacity: 0.7;
+    animation: floatCloud 20s linear infinite;
+}
+
+.floating-cloud::before,
+.floating-cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+.floating-cloud::before {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 10px;
+}
+
+.floating-cloud::after {
+    width: 60px;
+    height: 60px;
+    top: -35px;
+    right: 10px;
+}
+
+/* Particle Effects */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 107, 107, 0.6);
+    border-radius: 50%;
+    animation: particleFloat 8s linear infinite;
+}
+
+.dark-theme .particle {
+    background: rgba(135, 206, 235, 0.6);
+}
+
+/* Animations */
+@keyframes waveMotion {
+    0%, 100% { transform: translateX(0) scaleY(1); }
+    50% { transform: translateX(30px) scaleY(1.2); }
+}
+
+@keyframes foamSpread {
+    0%, 100% { 
+        width: 100%; 
+        opacity: 0.8; 
+    }
+    50% { 
+        width: 110%; 
+        opacity: 1;
+        transform: translateX(-5%);
+    }
+}
+
+@keyframes shellGlimmer {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes ballBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(180deg); }
+}
+
+@keyframes seagullFly {
+    0% { 
+        left: -30px; 
+        top: 20%; 
+        transform: rotate(0deg);
+    }
+    25% { 
+        top: 15%; 
+        transform: rotate(-5deg);
+    }
+    50% { 
+        top: 25%; 
+        transform: rotate(5deg);
+    }
+    75% { 
+        top: 18%; 
+        transform: rotate(-3deg);
+    }
+    100% { 
+        left: calc(100% + 30px); 
+        top: 22%; 
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes sunGlow {
+    0% { box-shadow: 0 0 30px rgba(255, 235, 59, 0.6); }
+    100% { box-shadow: 0 0 50px rgba(255, 235, 59, 0.9); }
+}
+
+@keyframes sunRays {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes moonGlow {
+    0% { box-shadow: 0 0 25px rgba(245, 245, 220, 0.8); }
+    100% { box-shadow: 0 0 40px rgba(245, 245, 220, 1); }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@keyframes welcomeGlow {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes starRotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes letterBounce {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes floatCloud {
+    0% { transform: translateX(-100px); }
+    100% { transform: translateX(calc(100vw + 100px)); }
+}
+
+@keyframes modalPop {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes particleFloat {
+    0% { 
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { 
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes palmSway {
+    0%, 100% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-50%) rotate(2deg); }
+    75% { transform: translateX(-50%) rotate(-2deg); }
+}
+
+@keyframes sparkleFloat {
+    0% { 
+        opacity: 1; 
+        transform: translateY(0) rotate(0deg) scale(0.5); 
+    }
+    50% {
+        transform: translateY(-50px) rotate(180deg) scale(1.2);
+    }
+    100% { 
+        opacity: 0; 
+        transform: translateY(-100px) rotate(360deg) scale(0.8); 
+    }
+}
+
+/* Responsive Design - Mobile First Approach */
+
+/* Extra Small Mobile Devices (320px - 480px) */
+@media screen and (max-width: 480px) {
+    .welcome-text {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    .star-container {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 20px;
+    }
+    
+    .hollow-star {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .star-letter {
+        font-size: 1.8rem;
+    }
+    
+    .message-btn {
+        padding: 12px 24px;
+        font-size: 1rem;
+        bottom: 40%;
+    }
+    
+    .toggle-btn {
+        width: 50px;
+        height: 50px;
+        top: 15px;
+        right: 15px;
+    }
+    
+    .dark-theme .toggle-btn {
+        left: 15px;
+    }
+    
+    .starfish-icon {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .sun, .moon {
+        width: 50px;
+        height: 50px;
+        top: 20px;
+    }
+    
+    .sun {
+        left: 20px;
+    }
+    
+    .moon {
+        right: 20px;
+    }
+    
+    .beach-scene {
+        height: 30%;
+    }
+    
+    .palm-tree {
+        width: 20px;
+        height: 60px;
+    }
+    
+    .palm-trunk {
+        width: 4px;
+        height: 45px;
+    }
+    
+    .palm-leaf {
+        width: 18px;
+        height: 3px;
+    }
+    
+    .beach-ball {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .seashell {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .footprint {
+        width: 8px;
+        height: 6px;
+    }
+    
+    .floating-cloud {
+        width: 60px;
+        height: 25px;
+    }
+    
+    .floating-cloud::before {
+        width: 30px;
+        height: 30px;
+        top: -15px;
+    }
+    
+    .floating-cloud::after {
+        width: 35px;
+        height: 35px;
+        top: -20px;
+    }
+    
+    .seagull {
+        font-size: 10px;
+        width: 15px;
+    }
+    
+    .modal-content {
+        padding: 20px 15px;
+        margin: 20px;
+    }
+    
+    .modal-title {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
+    .modal-message {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    
+    .particle {
+        width: 2px;
+        height: 2px;
+    }
+}
+
+/* Small Mobile Devices (481px - 600px) */
+@media screen and (min-width: 481px) and (max-width: 600px) {
+    .welcome-text {
+        font-size: 2.3rem;
+        margin-bottom: 35px;
+    }
+    
+    .star-container {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 22px;
+    }
+    
+    .hollow-star {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .star-letter {
+        font-size: 2rem;
+    }
+    
+    .message-btn {
+        padding: 13px 26px;
+        font-size: 1.05rem;
+        bottom: 42%;
+    }
+    
+    .toggle-btn {
+        width: 52px;
+        height: 52px;
+        top: 16px;
+        right: 16px;
+    }
+    
+    .dark-theme .toggle-btn {
+        left: 16px;
+    }
+    
+    .starfish-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .sun, .moon {
+        width: 55px;
+        height: 55px;
+        top: 25px;
+    }
+    
+    .sun {
+        left: 25px;
+    }
+    
+    .moon {
+        right: 25px;
+    }
+    
+    .beach-scene {
+        height: 32%;
+    }
+    
+    .modal-content {
+        padding: 25px 18px;
+    }
+    
+    .modal-title {
+        font-size: 1.4rem;
+    }
+    
+    .modal-message {
+        font-size: 1rem;
+    }
+}
+
+/* Large Mobile Devices (601px - 768px) */
+@media screen and (min-width: 601px) and (max-width: 768px) {
+    .welcome-text {
+        font-size: 2.8rem;
+        margin-bottom: 40px;
+    }
+    
+    .star-container {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 25px;
+    }
+    
+    .hollow-star {
+        width: 85px;
+        height: 85px;
+    }
+    
+    .star-letter {
+        font-size: 2.2rem;
+    }
+    
+    .message-btn {
+        padding: 14px 28px;
+        font-size: 1.08rem;
+        bottom: 43%;
+    }
+    
+    .toggle-btn {
+        width: 55px;
+        height: 55px;
+        top: 18px;
+        right: 18px;
+    }
+    
+    .dark-theme .toggle-btn {
+        left: 18px;
+    }
+    
+    .starfish-icon {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .sun, .moon {
+        width: 65px;
+        height: 65px;
+        top: 35px;
+    }
+    
+    .sun {
+        left: 35px;
+    }
+    
+    .moon {
+        right: 35px;
+    }
+    
+    .beach-scene {
+        height: 35%;
+    }
+    
+    .palm-tree {
+        width: 25px;
+        height: 70px;
+    }
+    
+    .palm-trunk {
+        width: 5px;
+        height: 50px;
+    }
+    
+    .palm-leaf {
+        width: 22px;
+        height: 3.5px;
+    }
+    
+    .beach-ball {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .floating-cloud {
+        width: 80px;
+        height: 32px;
+    }
+    
+    .floating-cloud::before {
+        width: 40px;
+        height: 40px;
+        top: -20px;
+    }
+    
+    .floating-cloud::after {
+        width: 48px;
+        height: 48px;
+        top: -28px;
+    }
+    
+    .modal-content {
+        padding: 30px 25px;
+    }
+    
+    .modal-title {
+        font-size: 1.6rem;
+    }
+    
+    .modal-message {
+        font-size: 1.1rem;
+    }
+}
+
+/* Tablets (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .welcome-text {
+        font-size: 3.2rem;
+        margin-bottom: 45px;
+    }
+    
+    .star-container {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 28px;
+    }
+    
+    .hollow-star {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .star-letter {
+        font-size: 2.3rem;
+    }
+    
+    .message-btn {
+        padding: 14px 28px;
+        font-size: 1.08rem;
+        bottom: 44%;
+    }
+    
+    .beach-scene {
+        height: 38%;
+    }
+    
+    .modal-title {
+        font-size: 1.8rem;
+    }
+    
+    .modal-message {
+        font-size: 1.15rem;
+    }
+}
+
+/* Desktop and Large Screens (1025px - 1440px) */
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
+    .welcome-text {
+        font-size: 3.8rem;
+    }
+    
+    .beach-scene {
+        height: 40%;
+    }
+}
+
+/* Ultra-wide screens (1441px+) */
+@media screen and (min-width: 1441px) {
+    .welcome-text {
+        font-size: 4.5rem;
+        margin-bottom: 60px;
+    }
+    
+    .star-container {
+        width: 140px;
+        height: 140px;
+        margin-bottom: 35px;
+    }
+    
+    .hollow-star {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .star-letter {
+        font-size: 3rem;
+    }
+    
+    .sun, .moon {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .toggle-btn {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .starfish-icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .welcome-container {
+        top: 25%;
+    }
+    
+    .welcome-text {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .star-container {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+    
+    .hollow-star {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .star-letter {
+        font-size: 1.5rem;
+    }
+    
+    .message-btn {
+        bottom: 25%;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .beach-scene {
+        height: 25%;
+    }
+    
+    .sun, .moon {
+        width: 40px;
+        height: 40px;
+        top: 15px;
+    }
+    
+    .sun {
+        left: 15px;
+    }
+    
+    .moon {
+        right: 15px;
+    }
+    
+    .toggle-btn {
+        width: 40px;
+        height: 40px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .dark-theme .toggle-btn {
+        left: 10px;
+    }
+    
+    .starfish-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* High DPI displays */
+@media screen and (-webkit-min-device-pixel-ratio: 2), 
+       screen and (min-resolution: 192dpi) {
+    .particle {
+        width: 2px;
+        height: 2px;
+    }
+    
+    .star {
+        width: 1px;
+        height: 1px;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .particle,
+    .wave,
+    .seagull,
+    .floating-cloud,
+    .beach-ball,
+    .star,
+    .hollow-star,
+    .star-letter {
+        animation: none !important;
+    }
+}
+
+/* Dark mode preference */
+@media (prefers-color-scheme: dark) {
+    body:not(.light-theme) {
+        background: linear-gradient(135deg, #191970 0%, #483D8B 30%, #2F4F4F 70%, #1C1C1C 100%);
+    }
+}
+
+/* Print styles */
+@media print {
+    .toggle-btn,
+    .message-btn,
+    .modal,
+    .particles,
+    .floating-elements,
+    .seagull {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .welcome-text {
+        color: black !important;
+        -webkit-text-fill-color: black !important;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .toggle-btn,
+    .message-btn,
+    .close-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .toggle-btn:hover,
+    .message-btn:hover,
+    .close-btn:hover,
+    .beach-ball:hover,
+    .seashell:hover {
+        transform: none;
+    }
+    
+    .toggle-btn:active {
+        transform: scale(0.95);
+    }
+    
+    .message-btn:active {
+        transform: translateX(-50%) scale(0.95);
+    }
+}
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Laylo Laylo - Day & Night Beach</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="starfish.png" type="image/x-icon">
+</head>
+<body class="light-theme">
+    <!-- Sun -->
+    <div class="sun" id="sun"></div>
+    
+    <!-- Moon -->
+    <div class="moon" id="moon"></div>
+    
+    <!-- Stars -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Starfish Toggle Button -->
+    <button class="toggle-btn" id="themeToggle" aria-label="Toggle day/night theme">
+        <svg class="starfish-icon" viewBox="0 0 100 100">
+            <path d="M50 5 L58 35 L90 35 L66 53 L74 83 L50 65 L26 83 L34 53 L10 35 L42 35 Z" 
+                  stroke="currentColor" stroke-width="2" fill="currentColor" stroke-linejoin="round"/>
+            <circle cx="50" cy="25" r="2" fill="rgba(255,255,255,0.8)"/>
+            <circle cx="35" cy="40" r="1.5" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="65" cy="40" r="1.5" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="30" cy="65" r="1.5" fill="rgba(255,255,255,0.6)"/>
+            <circle cx="70" cy="65" r="1.5" fill="rgba(255,255,255,0.6)"/>
+            <circle cx="50" cy="55" r="2" fill="rgba(255,255,255,0.8)"/>
+        </svg>
+    </button>
+    
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+        <div class="floating-cloud" style="top: 20%; animation-delay: 0s;"></div>
+        <div class="floating-cloud" style="top: 40%; animation-delay: 5s;"></div>
+        <div class="floating-cloud" style="top: 60%; animation-delay: 10s;"></div>
+    </div>
+    
+    <!-- Seagulls -->
+    <div class="seagull" style="animation-delay: 2s;">🕊️</div>
+    <div class="seagull" style="animation-delay: 8s;">🐦</div>
+    
+    <!-- Welcome Message -->
+    <div class="welcome-container">
+        <div class="welcome-text">Welcome Laylo Laylo</div>
+        
+        <!-- Animated Hollow Star with N -->
+        <div class="star-container">
+            <div class="hollow-star">
+                <svg viewBox="0 0 100 100">
+                    <path d="M50 10 L61 40 L90 40 L68 57 L78 87 L50 70 L22 87 L32 57 L10 40 L39 40 Z" stroke-linejoin="round" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="star-letter">N</div>
+        </div>
+    </div>
+
+    <!-- Special Message Button -->
+    <button class="message-btn" id="messageBtn">
+        ✨ Special Message ✨
+    </button>
+
+    <!-- Beach Scene -->
+    <div class="beach-scene">
+        <!-- Ocean with waves -->
+        <div class="ocean">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+        
+        <!-- Foam -->
+        <div class="foam"></div>
+        
+        <!-- Beach Sand -->
+        <div class="sand" id="sand"></div>
+        
+        <!-- Palm Trees -->
+        <div class="palm-tree" style="left: 5%;">
+            <div class="palm-trunk"></div>
+            <div class="palm-leaves">
+                <div class="palm-leaf"></div>
+                <div class="palm-leaf"></div>
+                <div class="palm-leaf"></div>
+                <div class="palm-leaf"></div>
+                <div class="palm-leaf"></div>
+            </div>
+        </div>
+        
+        <div class="palm-tree" style="right: 8%;">
+            <div class="palm-trunk"></div>
+            <div class="palm-leaves">
+                <div class="palm-leaf"></div>
+                <div class="palm-leaf"></div>
+                <div class="palm-leaf"></div>
+                <div class="palm-leaf"></div>
+                <div class="palm-leaf"></div>
+            </div>
+        </div>
+        
+        <!-- Beach Ball -->
+        <div class="beach-ball" id="beachBall"></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">For The Fresh Girl 🦦</h2>
+            <p class="modal-message">
+                <strong>The Fresh Girl:</strong> You have a unique positive energy, kind, radiates happiness, freedom, and is peaceful inside you.
+            </p>
+            <button class="close-btn" id="closeModal">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
