@@ -3,122 +3,1130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nada</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Laylo Laylo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="starfish.png" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            overflow: hidden;
+            transition: all 0.8s ease-in-out;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Light Theme - Morning */
+        .light-theme {
+            background: linear-gradient(135deg, #87CEEB 0%, #98D8E8 30%, #F0E68C 70%, #F4A460 100%);
+        }
+
+        /* Dark Theme - Night */
+        .dark-theme {
+            background: linear-gradient(135deg, #191970 0%, #483D8B 30%, #2F4F4F 70%, #1C1C1C 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* Header with title and toggle */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            z-index: 1000;
+            position: relative;
+        }
+
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Starfish Toggle Button */
+        .toggle-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 215, 0, 0.8));
+            border: 3px solid rgba(255, 107, 107, 0.6);
+            cursor: pointer;
+            padding: 8px;
+            transition: all 0.8s ease;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.5);
+        }
+
+        .dark-theme .toggle-btn {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.9), rgba(135, 206, 235, 0.8));
+            border: 3px solid rgba(135, 206, 235, 0.6);
+            box-shadow: 0 8px 20px rgba(135, 206, 235, 0.3);
+        }
+
+        .dark-theme .toggle-btn:hover {
+            box-shadow: 0 12px 30px rgba(135, 206, 235, 0.5);
+        }
+
+        .starfish-icon {
+            width: 40px;
+            height: 40px;
+            position: relative;
+            fill: #ff6b6b;
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 2px 6px rgba(255, 107, 107, 0.4));
+        }
+
+        .starfish-icon:hover {
+            filter: drop-shadow(0 4px 10px rgba(255, 107, 107, 0.6));
+        }
+
+        .dark-theme .starfish-icon {
+            fill: #87ceeb;
+            filter: drop-shadow(0 2px 6px rgba(135, 206, 235, 0.4));
+        }
+
+        .dark-theme .starfish-icon:hover {
+            filter: drop-shadow(0 4px 10px rgba(135, 206, 235, 0.6));
+        }
+
+        /* Content area with welcome message */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            position: relative;
+        }
+
+        .welcome-text {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: welcomeGlow 3s ease-in-out infinite, gradientShift 4s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+
+        /* Animated Hollow Star with N */
+        .star-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            margin-bottom: 30px;
+        }
+
+        .hollow-star {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            animation: starRotate 4s linear infinite;
+        }
+
+        .hollow-star svg {
+            width: 100%;
+            height: 100%;
+            stroke-width: 4;
+            fill: none;
+            stroke: #ff6b6b;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
+            transition: all 0.5s ease;
+        }
+
+        .dark-theme .hollow-star svg {
+            stroke: #87ceeb;
+            filter: drop-shadow(0 0 10px rgba(135, 206, 235, 0.5));
+        }
+
+        .star-letter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            animation: letterBounce 2s ease-in-out infinite;
+            transition: color 0.5s ease;
+        }
+
+        .dark-theme .star-letter {
+            color: #87ceeb;
+            text-shadow: 2px 2px 4px rgba(135, 206, 235, 0.3);
+        }
+
+        /* Special Message Button */
+        .message-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            margin-top: 20px;
+        }
+
+        .message-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-theme .message-btn {
+            background: linear-gradient(45deg, #4a90e2, #87ceeb);
+        }
+
+        /* Sun for light theme */
+        .sun {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ffeb3b 0%, #ff9800 100%);
+            border-radius: 50%;
+            opacity: 1;
+            transition: opacity 0.8s ease-in-out;
+            animation: sunGlow 3s ease-in-out infinite alternate;
+            box-shadow: 0 0 30px rgba(255, 235, 59, 0.6);
+        }
+
+        .sun::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle, rgba(255, 235, 59, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: sunRays 4s linear infinite;
+        }
+
+        /* Moon and stars for dark theme */
+        .moon {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #f5f5dc 0%, #ddd 100%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            animation: moonGlow 4s ease-in-out infinite alternate;
+            box-shadow: 0 0 25px rgba(245, 245, 220, 0.8);
+        }
+
+        .moon::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 15px;
+            height: 15px;
+            background: #bbb;
+            border-radius: 50%;
+            box-shadow: 25px 10px 0 #bbb, 10px 35px 0 #bbb;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        /* Beach Scene Container */
+        .beach-scene {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* Ocean Waves */
+        .ocean {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(180deg, #4682B4 0%, #1E90FF 50%, #0066CC 100%);
+            overflow: hidden;
+        }
+
+        .dark-theme .ocean {
+            background: linear-gradient(180deg, #2F4F4F 0%, #191970 50%, #000080 100%);
+        }
+
+        .wave {
+            position: absolute;
+            top: -10px;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+            border-radius: 0 0 50% 50%;
+            animation: waveMotion 3s ease-in-out infinite;
+        }
+
+        .wave:nth-child(2) {
+            animation-delay: -0.5s;
+            opacity: 0.7;
+            transform: translateX(20px);
+        }
+
+        .wave:nth-child(3) {
+            animation-delay: -1s;
+            opacity: 0.5;
+            transform: translateX(-20px);
+        }
+
+        /* Beach Sand */
+        .sand {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            background: linear-gradient(180deg, #F4A460 0%, #DEB887 50%, #D2B48C 100%);
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(139,69,19,0.1) 1px, transparent 1px),
+                radial-gradient(circle at 80% 20%, rgba(160,82,45,0.1) 1px, transparent 1px),
+                radial-gradient(circle at 40% 40%, rgba(210,180,140,0.1) 1px, transparent 1px);
+            background-size: 15px 15px, 20px 20px, 25px 25px;
+        }
+
+        .dark-theme .sand {
+            background: linear-gradient(180deg, #8B7355 0%, #696969 50%, #2F2F2F 100%);
+        }
+
+        /* Beach Foam */
+        .foam {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.8);
+            animation: foamSpread 2s ease-in-out infinite;
+        }
+
+        /* Seashells */
+        .seashell {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FFE4E1;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            border: 1px solid #DDA0DD;
+            animation: shellGlimmer 4s ease-in-out infinite;
+        }
+
+        /* Footprints in sand */
+        .footprint {
+            position: absolute;
+            width: 12px;
+            height: 8px;
+            background: rgba(139, 69, 19, 0.3);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform: rotate(-15deg);
+        }
+
+        /* Palm trees */
+        .palm-tree {
+            position: absolute;
+            bottom: 25%;
+            width: 30px;
+            height: 80px;
+        }
+
+        .palm-trunk {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 6px;
+            height: 60px;
+            background: linear-gradient(180deg, #8B4513 0%, #A0522D 100%);
+            border-radius: 3px;
+            transform: translateX(-50%);
+        }
+
+        .palm-leaves {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .palm-leaf {
+            position: absolute;
+            width: 25px;
+            height: 4px;
+            background: linear-gradient(90deg, #228B22 0%, #32CD32 100%);
+            border-radius: 2px;
+            transform-origin: left center;
+        }
+
+        .palm-leaf:nth-child(1) { transform: rotate(-30deg); }
+        .palm-leaf:nth-child(2) { transform: rotate(0deg); }
+        .palm-leaf:nth-child(3) { transform: rotate(30deg); }
+        .palm-leaf:nth-child(4) { transform: rotate(-60deg); }
+        .palm-leaf:nth-child(5) { transform: rotate(60deg); }
+
+        /* Beach Ball */
+        .beach-ball {
+            position: absolute;
+            bottom: 30%;
+            right: 10%;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: conic-gradient(#FF6B6B 0% 25%, #4ECDC4 25% 50%, #FFE66D 50% 75%, #FF8E53 75% 100%);
+            animation: ballBounce 3s ease-in-out infinite;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        /* Seagulls */
+        .seagull {
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            color: white;
+            font-size: 12px;
+            animation: seagullFly 15s linear infinite;
+            z-index: 10;
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-cloud {
+            position: absolute;
+            width: 100px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 40px;
+            opacity: 0.7;
+            animation: floatCloud 20s linear infinite;
+        }
+
+        .floating-cloud::before,
+        .floating-cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+        }
+
+        .floating-cloud::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+
+        .floating-cloud::after {
+            width: 60px;
+            height: 60px;
+            top: -35px;
+            right: 10px;
+        }
+
+        /* Particle Effects */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 107, 107, 0.6);
+            border-radius: 50%;
+            animation: particleFloat 8s linear infinite;
+        }
+
+        .dark-theme .particle {
+            background: rgba(135, 206, 235, 0.6);
+        }
+
+        /* Modal for the message */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 215, 0, 0.95));
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: modalPop 0.5s ease-out;
+            position: relative;
+        }
+
+        .dark-theme .modal-content {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.95), rgba(42, 82, 152, 0.95));
+            color: white;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-message {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .close-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes waveMotion {
+            0%, 100% { transform: translateX(0) scaleY(1); }
+            50% { transform: translateX(30px) scaleY(1.2); }
+        }
+
+        @keyframes foamSpread {
+            0%, 100% { 
+                width: 100%; 
+                opacity: 0.8; 
+            }
+            50% { 
+                width: 110%; 
+                opacity: 1;
+                transform: translateX(-5%);
+            }
+        }
+
+        @keyframes shellGlimmer {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes ballBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
+        @keyframes seagullFly {
+            0% { 
+                left: -30px; 
+                top: 20%; 
+                transform: rotate(0deg);
+            }
+            25% { 
+                top: 15%; 
+                transform: rotate(-5deg);
+            }
+            50% { 
+                top: 25%; 
+                transform: rotate(5deg);
+            }
+            75% { 
+                top: 18%; 
+                transform: rotate(-3deg);
+            }
+            100% { 
+                left: calc(100% + 30px); 
+                top: 22%; 
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes sunGlow {
+            0% { box-shadow: 0 0 30px rgba(255, 235, 59, 0.6); }
+            100% { box-shadow: 0 0 50px rgba(255, 235, 59, 0.9); }
+        }
+
+        @keyframes sunRays {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 25px rgba(245, 245, 220, 0.8); }
+            100% { box-shadow: 0 0 40px rgba(245, 245, 220, 1); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes welcomeGlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes starRotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes letterBounce {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        @keyframes floatCloud {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(calc(100vw + 100px)); }
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes particleFloat {
+            0% { 
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sparkleFloat {
+            0% { 
+                opacity: 1; 
+                transform: translateY(0) rotate(0deg) scale(0.5); 
+            }
+            50% {
+                transform: translateY(-50px) rotate(180deg) scale(1.2);
+            }
+            100% { 
+                opacity: 0; 
+                transform: translateY(-100px) rotate(360deg) scale(0.8); 
+            }
+        }
+
+        @keyframes palmSway {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            25% { transform: translateX(-50%) rotate(2deg); }
+            75% { transform: translateX(-50%) rotate(-2deg); }
+        }
+
+        /* Dark theme visibility */
+        .dark-theme .sun {
+            opacity: 0;
+        }
+
+        .dark-theme .moon {
+            opacity: 1;
+        }
+
+        .dark-theme .stars {
+            opacity: 1;
+        }
+
+        .dark-theme .welcome-text {
+            color: #e3f2fd;
+            text-shadow: 0 0 20px rgba(227, 242, 253, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .welcome-text {
+                font-size: 3rem;
+            }
+            
+            .sun, .moon {
+                width: 60px;
+                height: 60px;
+                top: 30px;
+            }
+            
+            .sun {
+                left: 30px;
+            }
+            
+            .moon {
+                right: 30px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+                width: 95%;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-message {
+                font-size: 1rem;
+            }
+
+            .beach-scene {
+                height: 35%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-text {
+                font-size: 2.5rem;
+            }
+            
+            .hollow-star {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .star-letter {
+                font-size: 2rem;
+            }
+
+            .message-btn {
+                font-size: 1rem;
+                padding: 12px 25px;
+            }
+
+            .toggle-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .starfish-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .beach-scene {
+                height: 30%;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .welcome-text {
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                padding: 20px 15px;
+            }
+
+            .beach-scene {
+                height: 25%;
+            }
+        }
+    </style>
 </head>
 <body class="light-theme">
-    <!-- Sun -->
-    <div class="sun" id="sun"></div>
-    
-    <!-- Moon -->
-    <div class="moon" id="moon"></div>
-    
-    <!-- Stars -->
-    <div class="stars" id="stars"></div>
-    
-    <!-- Starfish Toggle Button -->
-    <button class="toggle-btn" id="themeToggle" aria-label="Toggle day/night theme">
-        <svg class="starfish-icon" viewBox="0 0 100 100">
-            <path d="M50 5 L58 35 L90 35 L66 53 L74 83 L50 65 L26 83 L34 53 L10 35 L42 35 Z" 
-                  stroke="currentColor" stroke-width="2" fill="currentColor" stroke-linejoin="round"/>
-            <circle cx="50" cy="25" r="2" fill="rgba(255,255,255,0.8)"/>
-            <circle cx="35" cy="40" r="1.5" fill="rgba(255,255,255,0.7)"/>
-            <circle cx="65" cy="40" r="1.5" fill="rgba(255,255,255,0.7)"/>
-            <circle cx="30" cy="65" r="1.5" fill="rgba(255,255,255,0.6)"/>
-            <circle cx="70" cy="65" r="1.5" fill="rgba(255,255,255,0.6)"/>
-            <circle cx="50" cy="55" r="2" fill="rgba(255,255,255,0.8)"/>
-        </svg>
-    </button>
-    
-    <!-- Particles -->
-    <div class="particles" id="particles"></div>
-    
-    <!-- Floating Elements -->
-    <div class="floating-elements">
-        <div class="floating-cloud" style="top: 20%; animation-delay: 0s;"></div>
-        <div class="floating-cloud" style="top: 40%; animation-delay: 5s;"></div>
-        <div class="floating-cloud" style="top: 60%; animation-delay: 10s;"></div>
-    </div>
-    
-    <!-- Seagulls -->
-    <div class="seagull" style="animation-delay: 2s;">🕊️</div>
-    <div class="seagull" style="animation-delay: 8s;">🐦</div>
-    
-    <!-- Welcome Message -->
-    <div class="welcome-container">
-        <div class="welcome-text">Welcome Laylo Laylo</div>
-        
-        <!-- Animated Hollow Star with N -->
-        <div class="star-container">
-            <div class="hollow-star">
-                <svg viewBox="0 0 100 100">
-                    <path d="M50 10 L61 40 L90 40 L68 57 L78 87 L50 70 L22 87 L32 57 L10 40 L39 40 Z" stroke-linejoin="round" stroke-linecap="round"/>
+    <div class="container">
+        <!-- Header with title and toggle button -->
+        <div class="header">
+            <div class="title">Welcome to Your Beach Paradise</div>
+            <button class="toggle-btn" onclick="toggleTheme()">
+                <svg class="starfish-icon" viewBox="0 0 100 100">
+                    <path d="M50 5 L58 35 L90 35 L66 53 L74 83 L50 65 L26 83 L34 53 L10 35 L42 35 Z" 
+                          stroke="currentColor" stroke-width="2" fill="currentColor" stroke-linejoin="round"/>
+                    <circle cx="50" cy="25" r="2" fill="rgba(255,255,255,0.8)"/>
+                    <circle cx="35" cy="40" r="1.5" fill="rgba(255,255,255,0.7)"/>
+                    <circle cx="65" cy="40" r="1.5" fill="rgba(255,255,255,0.7)"/>
+                    <circle cx="30" cy="65" r="1.5" fill="rgba(255,255,255,0.6)"/>
+                    <circle cx="70" cy="65" r="1.5" fill="rgba(255,255,255,0.6)"/>
+                    <circle cx="50" cy="55" r="2" fill="rgba(255,255,255,0.8)"/>
                 </svg>
+            </button>
+        </div>
+        
+        <!-- Content area -->
+        <div class="content">
+            <div class="welcome-text">Welcome Laylo Laylo</div>
+            
+            <!-- Animated Hollow Star with N -->
+            <div class="star-container">
+                <div class="hollow-star">
+                    <svg viewBox="0 0 100 100">
+                        <path d="M50 10 L61 40 L90 40 L68 57 L78 87 L50 70 L22 87 L32 57 L10 40 L39 40 Z" stroke-linejoin="round" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="star-letter">N</div>
             </div>
-            <div class="star-letter">N</div>
-        </div>
-    </div>
-
-    <!-- Special Message Button -->
-    <button class="message-btn" id="messageBtn">
-        ✨ Special Message ✨
-    </button>
-
-    <!-- Beach Scene -->
-    <div class="beach-scene">
-        <!-- Ocean with waves -->
-        <div class="ocean">
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
+            
+            <!-- Special Message Button -->
+            <button class="message-btn" onclick="showMessage()">
+                ✨ Special Message ✨
+            </button>
         </div>
         
-        <!-- Foam -->
-        <div class="foam"></div>
+        <!-- Sun -->
+        <div class="sun"></div>
         
-        <!-- Beach Sand -->
-        <div class="sand" id="sand"></div>
+        <!-- Moon -->
+        <div class="moon"></div>
         
-        <!-- Palm Trees -->
-        <div class="palm-tree" style="left: 5%;">
-            <div class="palm-trunk"></div>
-            <div class="palm-leaves">
-                <div class="palm-leaf"></div>
-                <div class="palm-leaf"></div>
-                <div class="palm-leaf"></div>
-                <div class="palm-leaf"></div>
-                <div class="palm-leaf"></div>
+        <!-- Stars -->
+        <div class="stars" id="stars"></div>
+        
+        <!-- Particles -->
+        <div class="particles" id="particles"></div>
+        
+        <!-- Floating Elements -->
+        <div class="floating-elements">
+            <div class="floating-cloud" style="top: 20%; animation-delay: 0s;"></div>
+            <div class="floating-cloud" style="top: 40%; animation-delay: 5s;"></div>
+            <div class="floating-cloud" style="top: 60%; animation-delay: 10s;"></div>
+        </div>
+        
+        <!-- Seagulls -->
+        <div class="seagull" style="animation-delay: 2s;">🕊️</div>
+        <div class="seagull" style="animation-delay: 8s;">🐦</div>
+        
+        <!-- Beach Scene -->
+        <div class="beach-scene">
+            <!-- Ocean with waves -->
+            <div class="ocean">
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
             </div>
-        </div>
-        
-        <div class="palm-tree" style="right: 8%;">
-            <div class="palm-trunk"></div>
-            <div class="palm-leaves">
-                <div class="palm-leaf"></div>
-                <div class="palm-leaf"></div>
-                <div class="palm-leaf"></div>
-                <div class="palm-leaf"></div>
-                <div class="palm-leaf"></div>
+            
+            <!-- Foam -->
+            <div class="foam"></div>
+            
+            <!-- Beach Sand -->
+            <div class="sand" id="sand"></div>
+            
+            <!-- Palm Trees -->
+            <div class="palm-tree" style="left: 5%;">
+                <div class="palm-trunk"></div>
+                <div class="palm-leaves">
+                    <div class="palm-leaf"></div>
+                    <div class="palm-leaf"></div>
+                    <div class="palm-leaf"></div>
+                    <div class="palm-leaf"></div>
+                    <div class="palm-leaf"></div>
+                </div>
             </div>
+            
+            <div class="palm-tree" style="right: 8%;">
+                <div class="palm-trunk"></div>
+                <div class="palm-leaves">
+                    <div class="palm-leaf"></div>
+                    <div class="palm-leaf"></div>
+                    <div class="palm-leaf"></div>
+                    <div class="palm-leaf"></div>
+                    <div class="palm-leaf"></div>
+                </div>
+            </div>
+            
+            <!-- Beach Ball -->
+            <div class="beach-ball" id="beach-ball"></div>
         </div>
-        
-        <!-- Beach Ball -->
-        <div class="beach-ball" id="beachBall"></div>
     </div>
 
     <!-- Modal -->
     <div class="modal" id="modal">
         <div class="modal-content">
-            <h2 class="modal-title">For The Fresh Girl 🦦</h2>
+            <h2 class="modal-title">For The Fresh Girl 🌟</h2>
             <p class="modal-message">
-                <strong>The Fresh Girl:</strong> You have a unique positive energy, kind, radiates happiness, freedom, and is peaceful inside you.
+                **Nada: You have a unique positive energy, kind, radiates happiness, freedom, and is peaceful inside you.**
             </p>
-            <button class="close-btn" id="closeModal">Close</button>
+            <button class="close-btn" onclick="closeMessage()">Close</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Create stars for night theme
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 100;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const numParticles = 20;
+            
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Create beach elements
+        function createBeachElements() {
+            const sandContainer = document.getElementById('sand');
+            
+            // Create seashells
+            for (let i = 0; i < 8; i++) {
+                const shell = document.createElement('div');
+                shell.className = 'seashell';
+                shell.style.left = Math.random() * 90 + '%';
+                shell.style.bottom = Math.random() * 80 + '%';
+                shell.style.animationDelay = Math.random() * 4 + 's';
+                sandContainer.appendChild(shell);
+            }
+            
+            // Create footprints
+            for (let i = 0; i < 12; i++) {
+                const footprint = document.createElement('div');
+                footprint.className = 'footprint';
+                footprint.style.left = (20 + i * 5) + '%';
+                footprint.style.bottom = (30 + Math.random() * 20) + '%';
+                if (i % 2 === 0) {
+                    footprint.style.transform = 'rotate(15deg)';
+                }
+                sandContainer.appendChild(footprint);
+            }
+        }
+
+        // Toggle theme function
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('light-theme');
+            body.classList.toggle('dark-theme');
+            
+            // Add rotation animation to starfish
+            const starfish = document.querySelector('.starfish-icon');
+            starfish.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                starfish.style.transform = 'rotate(0deg) scale(1)';
+            }, 600);
+        }
+
+        // Show special message
+        function showMessage() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'flex';
+            
+            // Add sparkle effect
+            createSparkles();
+        }
+
+        // Close message
+        function closeMessage() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+
+        // Create sparkle effect
+        function createSparkles() {
+            const sparkles = ['✨', '⭐', '🌟', '💫', '🐚', '🌊'];
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = Math.random() * window.innerWidth + 'px';
+                sparkle.style.top = Math.random() * window.innerHeight + 'px';
+                sparkle.style.fontSize = '2rem';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.zIndex = '3000';
+                sparkle.style.animation = 'sparkleFloat 3s ease-out forwards';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    if (document.body.contains(sparkle)) {
+                        document.body.removeChild(sparkle);
+                    }
+                }, 3000);
+            }
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            createParticles();
+            createBeachElements();
+            
+            // Add palm sway effect
+            setTimeout(addPalmSway, 1000);
+            
+            // Add beach ball interaction
+            const beachBall = document.getElementById('beach-ball');
+            beachBall.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'ballBounce 1s ease-in-out infinite';
+                }, 10);
+            });
+            
+            // Add wave sound effect simulation periodically
+            setInterval(simulateWaveSound, 4000);
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeMessage();
+            }
+        });
+
+        // Add palm tree sway effect
+        function addPalmSway() {
+            const palmTrees = document.querySelectorAll('.palm-tree');
+            palmTrees.forEach(tree => {
+                const leaves = tree.querySelector('.palm-leaves');
+                leaves.style.animation = 'palmSway 3s ease-in-out infinite';
+            });
+        }
+
+        // Simulate wave sound effect
+        function simulateWaveSound() {
+            const waves = document.querySelectorAll('.wave');
+            waves.forEach((wave, index) => {
+                setTimeout(() => {
+                    wave.style.transform = 'scaleY(1.3)';
+                    setTimeout(() => {
+                        wave.style.transform = 'scaleY(1)';
+                    }, 200);
+                }, index * 100);
+            });
+        }
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                toggleTheme();
+            }
+            if (e.key === 'Escape') {
+                closeMessage();
+            }
+            if (e.key === 'w' || e.key === 'W') {
+                simulateWaveSound();
+            }
+        });
+    </script>
 </body>
 </html>
-
